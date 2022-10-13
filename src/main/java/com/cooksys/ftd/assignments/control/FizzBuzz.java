@@ -1,6 +1,7 @@
 package com.cooksys.ftd.assignments.control;
 
-import com.cooksys.ftd.assignments.control.util.MissingImplementationException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -17,6 +18,8 @@ import com.cooksys.ftd.assignments.control.util.MissingImplementationException;
  */
 public class FizzBuzz {
 
+	int a;
+	int b;
     /**
      * Checks whether a given int `a` is evenly divisible by a given int `b` or not.
      * For example, `divides(4, 2)` returns `true` and `divides(4, 3)` returns `false`.
@@ -26,9 +29,19 @@ public class FizzBuzz {
      * @return `true` if a is evenly divisible by b, `false` otherwise
      * @throws IllegalArgumentException if b is zero
      */
-    public static boolean divides(int a, int b) throws IllegalArgumentException {
-        throw new MissingImplementationException();
-    }
+	public static boolean divides(int a, int b) throws IllegalArgumentException {
+		if (b == 0) {
+			throw new IllegalArgumentException();
+		}
+		
+		if ((a % b) == 0) {
+			return true;
+
+		} else {
+			return false;
+		}
+
+	}
 
     /**
      * Generates a divisibility message for a given number. Returns null if the given number is not divisible by 3 or 5.
@@ -42,7 +55,18 @@ public class FizzBuzz {
      * @return a message according to the format above, or null if n is not divisible by either 3 or 5
      */
     public static String message(int n) {
-        throw new MissingImplementationException();
+        if ((n % 3) == 0 && (n % 5) == 0) {
+			return n + ": FizzBuzz";
+		}
+        else if (n % 3 == 0) {
+			return n + ": Fizz";
+		}
+		else if (n % 5 == 0) {
+			return n + ": Buzz";
+		}
+		else {
+			return null;
+		}
     }
 
     /**
@@ -55,16 +79,46 @@ public class FizzBuzz {
      * @return an array of divisibility messages
      * @throws IllegalArgumentException if the given end is less than the given start
      */
-    public static String[] messages(int start, int end) throws IllegalArgumentException {
-        throw new MissingImplementationException();
-    }
+	public static String[] messages(int start, int end) throws IllegalArgumentException {
+		if (end < start)
+			throw new IllegalArgumentException();
+		{
+
+			List<String> messageList = new ArrayList<String>();
+			
+
+			for (int i = start; i < end; i++) {
+				String message = message(i);
+				if (message != null) {
+					messageList.add(message);
+
+				}
+
+			}
+			String[] messageStrings = new String[messageList.size()];
+			for (int i = 0; i < messageStrings.length; i++) {
+				messageStrings[i] = messageList.get(i);               
+			}
+			return messageStrings;
+		}
+
+	}
+    
 
     /**
      * For this main method, iterate over the numbers 1 through 115 and print
      * the relevant messages to sysout
      */
     public static void main(String[] args) {
-        throw new MissingImplementationException();
+        
+    	String[] numbers = messages(1, 115);
+    	
+    	for (int i = 0; i < numbers.length; i++) {
+			System.out.println(numbers[i]);
+		}
+        
+        
+        
     }
 
 }
